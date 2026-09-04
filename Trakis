@@ -15,7 +15,7 @@ local Tab1 = Window:MakeTab({"Credits", "info"})
 Tab1:AddDiscordInvite({
     Name = "Trakis Hub | v1 teste",
     Description = "best script brookhaven",
-    Logo = "rbxassetid://",
+    Logo = "rbxassetid://119347630844956",
     Invite = "",
 })
 
@@ -23,8 +23,7 @@ Tab1:AddDiscordInvite({
 task.delay(1, function()
    Window:Dialog({
       Title = "Trakis hub atualizado!!!",
-      Text = "--itens vip
-              --emotes e fly ",
+      Text = "NOVA ABA DE ITENS VIP E FLY E EMOTE GRÁTIS",
       Options = {
         {
            "Discord",
@@ -67,9 +66,9 @@ local InfoTab = Window:MakeTab({ "Informations", "info" })
 InfoTab:AddSection({ "Siga o vitin no tiktok!" })
 
 InfoTab:AddDiscordInvite({
-   Name = "",
-   Description = "",
-   Logo = "",
+   Name = "entre no nosso server do Discord!",
+   Description = "ainda nao temos mais logo teremos.",
+   Logo = "rbxassetid://119347630844956",
    Invite = "",
 })
 
