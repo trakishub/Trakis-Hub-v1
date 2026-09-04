@@ -1,13 +1,13 @@
 local redzlib = loadstring(game:HttpGet("https://pastebin.com/raw/XqZsnzRQ",true))()
 
 local Window = redzlib:MakeWindow({
-  Title = "Trakis Hub | v1 teste",
+  Title = "Trakis Hub | V2 EXTREMO",
   SubTitle = "By: cafezin and vitin",
-  SaveFolder = "testando | v1"
+  SaveFolder = "testando | v2"
 })
 
 Window:AddMinimizeButton({
-    Button = { Image = "rbxassetid://119347630844956", BackgroundTransparency = 0 },
+    Button = { Image = "rbxassetid://86782479812194", BackgroundTransparency = 0 },
     Corner = { CornerRadius = UDim.new(35, 1) },
 })
 
@@ -16,7 +16,7 @@ local Tab1 = Window:MakeTab({"Credits", "info"})
 Tab1:AddDiscordInvite({
     Name = "Trakis Hub | v1 teste",
     Description = "best script brookhaven",
-    Logo = "rbxassetid://119347630844956",
+    Logo = "rbxassetid://86782479812194",
     Invite = "",
 })
 
@@ -24,7 +24,7 @@ Tab1:AddDiscordInvite({
 task.delay(1, function()
    Window:Dialog({
       Title = "Trakis hub atualizado!!!",
-      Text = "NOVA ABA DE ITENS VIP E FLY E EMOTE GRÁTIS",
+      Text = "NOVA ABA DE ITENS VIP E FLY E EMOTE GRÁTIS E NOVA INTERFACE",
       Options = {
         {
            "Discord",
@@ -69,7 +69,7 @@ InfoTab:AddSection({ "Siga o vitin no tiktok!" })
 InfoTab:AddDiscordInvite({
    Name = "entre no nosso server do Discord!",
    Description = "ainda nao temos mais logo teremos.",
-   Logo = "rbxassetid://119347630844956",
+   Logo = "rbxassetid://86782479812194",
    Invite = "",
 })
 
