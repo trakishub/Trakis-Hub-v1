@@ -1,13 +1,14 @@
-local redzlib = loadstring(game:HttpGet("https://pastebin.com/raw/XqZsnzRQ",true))()
+local redzlib = loadstring(game:HttpGet("https://raw.githubusercontent.com/toparemos/Library/refs/heads/main/library.lua"))()
+local Window = redzlib:MakeWindow({
 
 local Window = redzlib:MakeWindow({
-  Title = "Trakis Hub | V2 EXTREMO",
+  Title = "Trakis Hub | V3",
   SubTitle = "By: cafezin and vitin",
   SaveFolder = "testando | v2"
 })
 
 Window:AddMinimizeButton({
-    Button = { Image = "rbxassetid://86782479812194", BackgroundTransparency = 0 },
+    Button = { Image = "rbxassetid://82831701660755", BackgroundTransparency = 0 },
     Corner = { CornerRadius = UDim.new(35, 1) },
 })
 
@@ -16,7 +17,7 @@ local Tab1 = Window:MakeTab({"Credits", "info"})
 Tab1:AddDiscordInvite({
     Name = "Trakis Hub | v1 teste",
     Description = "best script brookhaven",
-    Logo = "rbxassetid://86782479812194",
+    Logo = "rbxassetid://82831701660755",
     Invite = "",
 })
 
@@ -69,7 +70,7 @@ InfoTab:AddSection({ "Siga o vitin no tiktok!" })
 InfoTab:AddDiscordInvite({
    Name = "entre no nosso server do Discord!",
    Description = "ainda nao temos mais logo teremos.",
-   Logo = "rbxassetid://86782479812194",
+   Logo = "rbxassetid://82831701660755",
    Invite = "",
 })
 
