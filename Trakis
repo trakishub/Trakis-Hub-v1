@@ -22,8 +22,9 @@ Tab1:AddDiscordInvite({
 
 task.delay(1, function()
    Window:Dialog({
-      Title = "Trakis huh atualizado!!!",
-      Text = "Novas opções meu manoo!!!",
+      Title = "Trakis hub atualizado!!!",
+      Text = "--itens vip
+              --emotes e fly ",
       Options = {
         {
            "Discord",
@@ -63,13 +64,13 @@ print("Trakis hub")
 
 local InfoTab = Window:MakeTab({ "Informations", "info" })
 
-InfoTab:AddSection({ "Internet Things" })
+InfoTab:AddSection({ "Siga o vitin no tiktok!" })
 
 InfoTab:AddDiscordInvite({
    Name = "",
    Description = "",
-   Logo = "rbxassetid://78887700340952",
-   Invite = "https://discord.gg/GNjq644ARw",
+   Logo = "",
+   Invite = "",
 })
 
 InfoTab:AddSection({ "Credits" })
