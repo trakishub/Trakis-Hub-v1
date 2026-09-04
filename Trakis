@@ -1,0 +1,229 @@
+local redzlib = loadstring(game:HttpGet("https://raw.githubusercontent.com/wx-sources/unixLibraryy/refs/heads/main/Redzhubui.txt"))()
+local Window = redzlib:MakeWindow({
+  Title = "Trakis Hub | v1 teste",
+  SubTitle = "By: cafezin and vitin",
+  SaveFolder = "testando | v1"
+})
+
+Window:AddMinimizeButton({
+    Button = { Image = "rbxassetid://119347630844956", BackgroundTransparency = 0 },
+    Corner = { CornerRadius = UDim.new(35, 1) },
+})
+
+local Tab1 = Window:MakeTab({"Credits", "info"})
+
+Tab1:AddDiscordInvite({
+    Name = "Trakis Hub | v1 teste",
+    Description = "best script brookhaven",
+    Logo = "rbxassetid://",
+    Invite = "",
+})
+
+
+task.delay(1, function()
+   Window:Dialog({
+      Title = "Trakis huh atualizado!!!",
+      Text = "Novas opções meu manoo!!!",
+      Options = {
+        {
+           "Discord",
+           function()
+              local discordLink = ""
+              if setclipboard then
+                setclipboard(discordLink)
+                Libary:Notify({
+                   Title = "",
+                   Text = "",
+                   Duration = 5
+                })
+              else
+                Libary:Notify({
+                   Title = "TRAKIS HUB ATUALIZADO!",
+                   Text = "Seu executor não permite copiar texto automaticamente.",
+                   Duration = 5
+                })
+              end
+           end
+        },
+        {
+           "Open",
+           function()
+              Libary:Notify({
+                Title = "Trakis hub ",
+                Text = "Bem-vindo(a) ao melhor Hub!",
+                Duration = 5
+              })
+           end
+        }
+      }
+   })
+end)
+
+print("Trakis hub")
+
+local InfoTab = Window:MakeTab({ "Informations", "info" })
+
+InfoTab:AddSection({ "Internet Things" })
+
+InfoTab:AddDiscordInvite({
+   Name = "",
+   Description = "",
+   Logo = "rbxassetid://78887700340952",
+   Invite = "https://discord.gg/GNjq644ARw",
+})
+
+InfoTab:AddSection({ "Credits" })
+InfoTab:AddParagraph({ "Owner", "cafezin and vitin" })
+InfoTab:AddParagraph({ "Programmers", "cafezin" })
+
+local Players = game:GetService("Players")
+local LocalPlayer = Players.LocalPlayer
+
+local Section = InfoTab:AddSection({"Script Usage Time:"})
+local playTimeParagraph = InfoTab:AddParagraph({
+   Title = "00:00:00",
+   Text = "Script Usage Time:"
+})
+
+local seconds = 0
+
+task.spawn(function()
+   while true do
+      task.wait(1)
+      seconds += 1
+
+      local hours = math.floor(seconds / 3600)
+      local minutes = math.floor((seconds % 3600) / 60)
+      local secs = seconds % 60
+
+      local timeFormatted = string.format("%02d:%02d:%02d", hours, minutes, secs)
+      playTimeParagraph:SetTitle(timeFormatted)
+   end
+end)
+
+local Section = InfoTab:AddSection({"Your Time On The Server"})
+local serverTimeParagraph = InfoTab:AddParagraph({
+   Title = "00:00:00",
+   Text = "Your Time On The Server"
+})
+
+task.spawn(function()
+   while true do
+      task.wait(0.5)
+      local seconds = math.floor(workspace.DistributedGameTime)
+
+      local hours = math.floor(seconds / 3600)
+      local minutes = math.floor((seconds % 3600) / 60)
+      local secs = seconds % 60
+
+      local formatted = string.format("%02d:%02d:%02d", hours, minutes, secs)
+      serverTimeParagraph:SetTitle(formatted)
+   end
+end)
+
+InfoTab:AddSection({ "Rejoin" })
+InfoTab:AddButton({
+   Name = "Rejoin",
+   Callback = function()
+      local TeleportService = game:GetService("TeleportService")
+      TeleportService:TeleportToPlaceInstance(game.PlaceId, game.JobId, game.Players.LocalPlayer)
+   end
+})
+
+-- Não copia Skidder, pq eu vou derrubar seu script.(Kita) 
+
+
+local Tab = Window:MakeTab({"Itens/fun", "rbxassetid://127904742940104"})
+
+local Players = game:GetService("Players")
+local ReplicatedStorage = game:GetService("ReplicatedStorage")
+
+local LocalPlayer = Players.LocalPlayer
+local RE = ReplicatedStorage:WaitForChild("RE")
+
+local ToolEvent = RE:WaitForChild("1Playe1rTrigge1rEven1t")
+local ToolRemote = RE:WaitForChild("1Too1l")
+
+local function CreateToolButton(title, toolName, remoteType)
+   Tab:AddButton({
+      Title = title,
+      Locked = false,
+      Callback = function()
+
+        if remoteType == "Function" then
+           ToolRemote:InvokeServer(
+              "PickingTools",
+              toolName
+           )
+
+        else
+           ToolEvent:FireServer(
+              "AcceptedToolToServer",
+              toolName,
+              LocalPlayer
+           )
+        end
+      end
+   })
+end
+
+local Tools = {
+   {
+      Title = "Planador",
+      Tool = "Glider"
+   },
+
+   {
+      Title = "Canhão",
+      Tool = "Cannon"
+   },
+
+   {
+      Title = "Bola de Basquete Dourada",
+      Tool = "GoldenBasketball"
+   },
+
+   {
+      Title = "Balão de Água",
+      Tool = "Water Balloon",
+      Type = "Function"
+   },
+
+   {
+      Title = "Lançador de Ovo",
+      Tool = "EggLauncher"
+   },
+
+   {
+      Title = "Cristal Verde",
+      Tool = "UraniumRod"
+   },
+
+   {
+      Title = "Serra Elétrica",
+      Tool = "Chainsaw"
+   },
+
+   {
+      Title = "Ski",
+      Tool = "Skis"
+   },
+
+   {
+      Title = "Money Gun",
+      Tool = "MoneyGun"
+   },
+
+   {
+      Title = "Snowboard",
+      Tool = "Snowboard"
+   }
+}
+
+for _, tool in ipairs(Tools) do
+   CreateToolButton(
+      tool.Title,
+      tool.Tool,
+      tool.Type
+   )
+end
