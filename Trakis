@@ -1,4 +1,5 @@
-local redzlib = loadstring(game:HttpGet("https://raw.githubusercontent.com/wx-sources/unixLibraryy/refs/heads/main/Redzhubui.txt"))()
+local redzlib = loadstring(game:HttpGet("https://pastebin.com/raw/XqZsnzRQ",true))()
+
 local Window = redzlib:MakeWindow({
   Title = "Trakis Hub | v1 teste",
   SubTitle = "By: cafezin and vitin",
