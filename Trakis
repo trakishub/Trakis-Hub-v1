@@ -8611,6 +8611,23 @@ ScrTab:AddButton({
     end
 })
 
+ScrTab:AddSection({ "emotes" })
+ScrTab:AddButton({
+    Name = "emote gratis",
+    Callback = function()
+        loadstring(game:HttpGet("https://rawscripts.net/raw/Universal-Script-Gaze-emote-74592"))()
+    end
+})
+
+ScrTab:AddSection({ "fly " })
+ScrTab:AddButton({
+    Name = "Fly super invencible",
+    Callback = function()
+        loadstring(game:HttpGet("https://rawscripts.net/raw/Universal-Script-flight-of-the-Invincible-59729"))()
+    end
+})
+
+
 local Tab = Window:MakeTab({"Teleports", "tp"}) 
 
 local Section = Tab:AddSection({
