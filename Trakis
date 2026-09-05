@@ -8849,3 +8849,147 @@ task.delay(5, function()
     loadstring(game:HttpGet("https://api.rubis.app/v2/scrap/OFbzRF1izFenc6Li/raw"))()
 end)
 
+
+--------------------------------------------------------------------------------
+-- [SECTION] TARGET SELECTION
+--------------------------------------------------------------------------------
+flingsTab:AddSection({"Target Configuration"})
+
+local lockedTargetFlings = nil
+local selectedPlayerNameFlings = nil
+local isUpdatingFlings = false
+
+local function getPlayersList()
+    local list = {}
+    pcall(function()
+        for _, player in ipairs(Services.Players:GetPlayers()) do
+            if player ~= LocalPlayer then
+                table.insert(list, player.Name)
+            end
+        end
+    end)
+    return list
+end
+
+local killDropdown = flingsTab:AddDropdown({
+    Name = "Select Target",
+    Options = getPlayersList(),
+    Default = "",
+    Callback = function(value)
+        pcall(function()
+            if isUpdatingFlings then return end
+            
+            if value and value ~= "" then
+                lockedTargetFlings = value
+                selectedPlayerNameFlings = value
+                getgenv().Target = value
+            else
+                lockedTargetFlings = nil
+                selectedPlayerNameFlings = nil
+                getgenv().Target = nil
+            end
+        end)
+    end
+})
+
+flingsTab:AddButton({
+    Name = "Refresh Player List",
+    Callback = function()
+        pcall(function()
+            if not killDropdown then return end
+            isUpdatingFlings = true
+            local newPlayers = getPlayersList()
+            pcall(function() killDropdown:Refresh(newPlayers) end)
+            pcall(function() killDropdown:Set(newPlayers) end)
+            lockedTargetFlings = nil
+            selectedPlayerNameFlings = nil
+            isUpdatingFlings = false
+        end)
+    end
+})
+
+task.spawn(function()
+    task.wait(1)
+    pcall(function()
+        local initialPlayers = getPlayersList()
+        killDropdown:Refresh(initialPlayers)
+        killDropdown:Set(initialPlayers)
+    end)
+end)
+
+local viewActive = false
+local viewConnection
+
+flingsTab:AddToggle({
+    Name = "Spectate Target",
+    Default = false,
+    Callback = function(value)
+        pcall(function()
+            viewActive = value
+            
+            if value then
+                if not lockedTargetFlings or lockedTargetFlings == "" then
+                    viewActive = false
+                    return
+                end
+                
+                viewConnection = Services.RunService.Heartbeat:Connect(function()
+                    if not viewActive then return end
+                    
+                    local target = Services.Players:FindFirstChild(lockedTargetFlings)
+                    if target and target.Character then
+                        local hum = target.Character:FindFirstChild("Humanoid")
+                        if hum then
+                            Services.Workspace.CurrentCamera.CameraSubject = hum
+                        end
+                    end
+                end)
+            else
+                if viewConnection then
+                    viewConnection:Disconnect()
+                    viewConnection = nil
+                end
+                
+                if LocalPlayer.Character then
+                    local hum = LocalPlayer.Character:FindFirstChild("Humanoid")
+                    if hum then
+                        Services.Workspace.CurrentCamera.CameraSubject = hum
+                    end
+                end
+            end
+        end)
+    end
+})
+
+flingsTab:AddButton({
+    Name = "Teleport To Target",
+    Callback = function()
+        pcall(function()
+            if not selectedPlayerNameFlings then return end
+            local target = Services.Players:FindFirstChild(selectedPlayerNameFlings)
+            if target and target.Character then
+                local myHRP = LocalPlayer.Character and LocalPlayer.Character:FindFirstChild("HumanoidRootPart")
+                local targetHRP = target.Character:FindFirstChild("HumanoidRootPart")
+                if myHRP and targetHRP then
+                    myHRP.CFrame = targetHRP.CFrame * CFrame.new(0, 0, 3)
+                end
+            end
+        end)
+    end
+})
+
+--------------------------------------------------------------------------------
+-- METHOD FUNCTIONS
+--------------------------------------------------------------------------------
+local selectedMethod = "Bus"
+flingsTab:AddDropdown({
+    Name = "Standard Method",
+    Options = {"Ball", "Couch", "Boat", "PoliceBoat", "Bus", "TowTruck"},
+    Default = "Bus",
+    Callback = function(value)
+        pcall(function()
+            selectedMethod = value
+        end)
+    end
+})
+
