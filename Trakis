@@ -133,6 +133,21 @@ InfoTab:AddButton({
 
 -- Não copia Skidder, pq eu vou derrubar seu script.(Kita) 
 
+--------------------------------------------------------------------------------
+-- METHOD FUNCTIONS
+--------------------------------------------------------------------------------
+local selectedMethod = "Bus"
+flingsTab:AddDropdown({
+    Name = "Standard Method",
+    Options = {"Ball", "Couch", "Boat", "PoliceBoat", "Bus", "TowTruck"},
+    Default = "Bus",
+    Callback = function(value)
+        pcall(function()
+            selectedMethod = value
+        end)
+    end
+})
+
 
 local Tab = Window:MakeTab({"Itens/fun", "rbxassetid://127904742940104"})
 
