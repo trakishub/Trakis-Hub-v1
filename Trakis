@@ -109,14 +109,6 @@ Window:AddMinimizeButton({
     Corner = { CornerRadius = UDim.new(35, 1) },
 })
 
-local Tab1 = Window:MakeTab({"Credits", "info"})
-
-Tab1:AddDiscordInvite({
-    Name = "Trakis Hub | v1 teste",
-    Description = "best script brookhaven",
-    Logo = "rbxassetid://82831701660755",
-    Invite = "",
-})
 
 
 task.delay(1, function()
