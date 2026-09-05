@@ -8850,7 +8850,7 @@ task.delay(5, function()
 end)
 
 
-local Tab14 = Window:MakeTab({"Flings", "fling"})
+local Tab14 = Window:MakeTab({"Flings", "star"})
 
 local lockedTargetFlings = nil
 local selectedPlayerNameFlings = nil
@@ -8975,17 +8975,7 @@ flingsTab:AddButton({
     end
 })
 
---------------------------------------------------------------------------------
--- METHOD FUNCTIONS
---------------------------------------------------------------------------------
-local selectedMethod = "Bus"
-flingsTab:AddDropdown({
-    Name = "Standard Method",
-    Options = {"Ball", "Couch", "Boat", "PoliceBoat", "Bus", "TowTruck"},
-    Default = "Bus",
-    Callback = function(value)
-        pcall(function()
-            selectedMethod = value
+
         end)
     end
 })
