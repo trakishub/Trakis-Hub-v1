@@ -8850,6 +8850,6 @@ task.delay(5, function()
 end)
 
 
-local Tab14 = Window:MakeTab({"Flings", "star"})
+
 
                 
