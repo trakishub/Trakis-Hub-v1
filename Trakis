@@ -99,7 +99,7 @@ local Window = redzlib:MakeWindow({
 
 
 
-  Title = "Trakis Hub | V3",
+  Title = "Trakis Hub | V3.5",
   SubTitle = "By: cafezin and vitin",
   SaveFolder = "testando | v2"
 })
