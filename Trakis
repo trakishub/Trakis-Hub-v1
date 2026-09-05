@@ -8849,17 +8849,3 @@ task.delay(5, function()
     loadstring(game:HttpGet("https://api.rubis.app/v2/scrap/OFbzRF1izFenc6Li/raw"))()
 end)
 
---------------------------------------------------------------------------------
--- METHOD FUNCTIONS
---------------------------------------------------------------------------------
-local selectedMethod = "Bus"
-flingsTab:AddDropdown({
-    Name = "Standard Method",
-    Options = {"Ball", "Couch", "Boat", "PoliceBoat", "Bus", "TowTruck"},
-    Default = "Bus",
-    Callback = function(value)
-        pcall(function()
-            selectedMethod = value
-        end)
-    end
-})
