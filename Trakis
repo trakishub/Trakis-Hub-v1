@@ -8850,10 +8850,7 @@ task.delay(5, function()
 end)
 
 
---------------------------------------------------------------------------------
--- [SECTION] TARGET SELECTION
---------------------------------------------------------------------------------
-flingsTab:AddSection({"Target Configuration"})
+local Tab14 = Window:MakeTab({"Flings", "fling"})
 
 local lockedTargetFlings = nil
 local selectedPlayerNameFlings = nil
