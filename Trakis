@@ -1,7 +1,6 @@
 local redzlib = loadstring(game:HttpGet("https://raw.githubusercontent.com/toparemos/Library/refs/heads/main/library.lua"))()
 local Window = redzlib:MakeWindow({
 
-local Window = redzlib:MakeWindow({
   Title = "Trakis Hub | V3",
   SubTitle = "By: cafezin and vitin",
   SaveFolder = "testando | v2"
