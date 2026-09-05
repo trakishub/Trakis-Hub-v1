@@ -110,7 +110,6 @@ Window:AddMinimizeButton({
 })
 
 
-
 task.delay(1, function()
    Window:Dialog({
       Title = "Trakis hub atualizado!!!",
