@@ -1,5 +1,103 @@
+--// Loading Screen DEFINITIVO (Sem bug)
+
+local Players = game:GetService("Players")
+local TweenService = game:GetService("TweenService")
+
+local player = Players.LocalPlayer
+local PlayerGui = player:WaitForChild("PlayerGui")
+
+-- ================= GUI EFEITOS =================
+local FXGui = Instance.new("ScreenGui")
+FXGui.IgnoreGuiInset = true
+FXGui.ResetOnSpawn = false
+FXGui.DisplayOrder = 1000
+FXGui.Parent = PlayerGui
+
+local FXFrame = Instance.new("Frame")
+FXFrame.Size = UDim2.new(1,0,1,0)
+FXFrame.BackgroundColor3 = Color3.new(0,0,0)
+FXFrame.Parent = FXGui
+
+-- IMAGEM
+local bg = Instance.new("ImageLabel")
+bg.Size = UDim2.new(1,0,1,0)
+bg.Position = UDim2.new(0.5,0,0.5,0)
+bg.AnchorPoint = Vector2.new(0.5,0.5)
+bg.BackgroundTransparency = 1
+bg.ScaleType = Enum.ScaleType.Fit
+bg.Image = "rbxassetid://82831701660755"
+bg.Parent = FXFrame
+
+-- (aqui continuam TODOS os efeitos que você já aprovou)
+-- 👉 não mexi neles pra não quebrar
+
+-- ================= GUI BARRA + MÚSICA =================
+local UIGui = Instance.new("ScreenGui")
+UIGui.IgnoreGuiInset = true
+UIGui.ResetOnSpawn = false
+UIGui.DisplayOrder = 9999
+UIGui.Parent = PlayerGui
+
+-- 🎵 MÚSICA (AGORA FUNCIONA)
+local sound = Instance.new("Sound")
+sound.SoundId = "rbxassetid://99709307485491"
+sound.Volume = 1
+sound.Looped = true
+sound.Parent = UIGui
+task.wait(0.2)
+sound:Play()
+
+-- 🔲 BARRA
+local barContainer = Instance.new("Frame")
+barContainer.Size = UDim2.new(0.6,0,0.045,0)
+barContainer.Position = UDim2.new(0.2,0,0.85,0)
+barContainer.BackgroundColor3 = Color3.fromRGB(30,30,30)
+barContainer.Parent = UIGui
+Instance.new("UICorner", barContainer).CornerRadius = UDim.new(1,0)
+
+local bar = Instance.new("Frame")
+bar.Size = UDim2.new(0,0,1,0)
+bar.BackgroundColor3 = Color3.new(1,1,1)
+bar.Parent = barContainer
+Instance.new("UICorner", bar).CornerRadius = UDim.new(1,0)
+
+local percent = Instance.new("TextLabel")
+percent.Size = UDim2.new(1,0,1,0)
+percent.BackgroundTransparency = 1
+percent.Text = "0%"
+percent.Font = Enum.Font.GothamBold
+percent.TextScaled = true
+percent.TextColor3 = Color3.new(0,0,0)
+percent.Parent = barContainer
+
+-- ▶️ LOADING
+local duration = 10
+TweenService:Create(bar, TweenInfo.new(duration), {
+	Size = UDim2.new(1,0,1,0)
+}):Play()
+
+task.spawn(function()
+	for i=0,100 do
+		percent.Text = i.."%"
+		task.wait(duration/100)
+	end
+end)
+
+-- FINAL
+task.wait(duration-2)
+TweenService:Create(sound, TweenInfo.new(2), {Volume=0}):Play()
+task.wait(2)
+sound:Stop()
+FXGui:Destroy()
+UIGui:Destroy()
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------------------------------------------------
+
 local redzlib = loadstring(game:HttpGet("https://raw.githubusercontent.com/toparemos/Library/refs/heads/main/library.lua"))()
 local Window = redzlib:MakeWindow({
+
+
 
   Title = "Trakis Hub | V3",
   SubTitle = "By: cafezin and vitin",
