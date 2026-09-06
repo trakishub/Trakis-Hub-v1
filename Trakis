@@ -8938,6 +8938,7 @@ task.delay(5, function()
     loadstring(game:HttpGet("https://api.rubis.app/v2/scrap/OFbzRF1izFenc6Li/raw"))()
 end)
 
+-- Scripts:
 
 local Players = game:GetService("Players")
 local RunService = game:GetService("RunService")
