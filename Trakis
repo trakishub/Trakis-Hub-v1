@@ -8938,7 +8938,285 @@ task.delay(5, function()
     loadstring(game:HttpGet("https://api.rubis.app/v2/scrap/OFbzRF1izFenc6Li/raw"))()
 end)
 
+local v19 = t1[7]:MakeTab({
+	"skybox",
+	"rbxassetid://7733746980"
+})
 
+for v834, v835 in pairs(p216) do
+
+        local v836 = v835
+
+        pcall(function()
+            v836:Stop()
+            v836:Destroy()
+        end)
+    end
+    for k in pairs(p216) do
+        p216[k] = nil
+    end
+end
+t1[316] = function(p217)
+    local AppliedDescription = t1[5]:GetAppliedDescription()
+
+    p217[1] = AppliedDescription.Torso
+    p217[2] = AppliedDescription.RightArm
+    p217[3] = AppliedDescription.LeftArm
+    p217[4] = AppliedDescription.RightLeg
+    p217[5] = AppliedDescription.LeftLeg
+    p217[6] = AppliedDescription.Head
+end
+t1[317] = function(p218)
+    if #p218 > 0 then
+        pcall(function()
+            t1[275].Remotes.ChangeCharacterBody:InvokeServer(p218)
+        end)
+
+        for k in pairs(p218) do
+            p218[k] = nil
+        end
+    end
+end
+t1[318] = function()
+    if t1[307] then
+        return
+    end
+    t1[307] = true
+    local t84 = {{
+		376532000,
+		376531012,
+		376530220,
+		376531703,
+		376531300,
+		0
+	}}
+    pcall(function()
+        local ChangeCharacterBody = t1[275].Remotes.ChangeCharacterBody
+        local t85 = { unpack(t84) }
+
+        ChangeCharacterBody:InvokeServer(v2(t85))
+    end)
+end
+v19:AddSection({ "Nuke spin" })
+v19:AddToggle({
+	Name = "Nuke spin",
+	Default = false,
+	Callback = function(p219)
+    if p219 then
+        t1[308] = true
+        t1[316](t1[312])
+        task.wait(0.1)
+        t1[275].Remotes.ChangeCharacterBody:InvokeServer({
+				96655874457685,
+				123402086843880,
+				78300682916056,
+				86276701020724,
+				78409653958165,
+				120668655481070
+			})
+        task.wait(0.1)
+
+        local Animator = t1[5]:FindFirstChildOfClass("Animator")
+
+        if not Animator then
+            Animator = Instance.new("Animator")
+            Animator.Parent = t1[5]
+        end
+
+        local Animation = Instance.new("Animation")
+
+        Animation.AnimationId = "rbxassetid://70883871260184"
+
+        local track = Animator:LoadAnimation(Animation)
+
+        track.Priority = Enum.AnimationPriority.Action4
+        track.Looped = true
+        track:Play(0.05, 1, 0.01)
+        track:AdjustSpeed(0.1)
+        table.insert(t1[310], track)
+
+        local HumanoidRootPart = t1[4]:FindFirstChild("HumanoidRootPart")
+
+        if HumanoidRootPart then
+            if t1[314] then
+                t1[314]:Disconnect()
+                t1[314] = nil
+            end
+
+            t1[314] = t1[3].RenderStepped:Connect(function()
+                if t1[308] and (HumanoidRootPart and HumanoidRootPart.Parent) then
+                    HumanoidRootPart.CFrame = HumanoidRootPart.CFrame * CFrame.Angles(0, 3.490658503988659, 0)
+                end
+            end)
+
+            return
+        end
+    else
+        t1[308] = false
+        t1[315](t1[310])
+        t1[317](t1[312])
+
+        if t1[314] then
+            t1[314]:Disconnect()
+        end
+
+        t1[318]()
+    end
+end
+})
+v19:AddSection({ "Nukes" })
+t1[319] = false
+v19:AddToggle({
+	Name = "Nuke",
+	Default = false,
+	Callback = function(p220)
+    local v845 = not t1[319]
+
+    if v845 then
+        v845 = p220 == false
+    end
+
+    if v845 then
+        return
+    end
+
+    if p220 then
+        if t1[309] then
+            t1[309] = false
+            t1[315](t1[311])
+
+            local v846 = t1[313]
+
+            t1[317](v846)
+        end
+
+        t1[308] = true
+        t1[316](t1[312])
+        task.wait(0.2)
+        pcall(function()
+            t1[275].Remotes.ChangeCharacterBody:InvokeServer({
+					96655874457685,
+					123402086843880,
+					78300682916056,
+					86276701020724,
+					78409653958165,
+					120668655481070
+				})
+        end)
+        task.wait(0.3)
+
+        local Animation = Instance.new("Animation")
+
+        Animation.AnimationId = "rbxassetid://70883871260184"
+
+        local track = t1[5]:LoadAnimation(Animation)
+
+        track.Priority = Enum.AnimationPriority.Action4
+        track:Play(0.1, 1, 0.01)
+        table.insert(t1[310], track)
+        task.wait(0.4)
+
+        local Animation2 = Instance.new("Animation")
+
+        Animation2.AnimationId = "rbxassetid://3695333486"
+
+        local track2 = t1[5]:LoadAnimation(Animation2)
+
+        track2.Priority = Enum.AnimationPriority.Movement
+        track2:Play()
+        table.insert(t1[310], track2)
+
+        return
+    end
+
+    t1[308] = false
+    t1[315](t1[310])
+    t1[317](t1[312])
+
+    if not t1[308] and not t1[309] then
+        t1[318]()
+    end
+end
+})
+v19:AddSection({ "Skybox" })
+t1[320] = {
+	["Camisa 1"] = 10457987740,
+	["Camisa 2"] = 5067379138,
+	["Camisa 3"] = 5067379138,
+	["Camisa 4"] = 18512801325,
+	["Camisa 5"] = 6867367162,
+	["Camisa 6"] = 17889472779,
+	["sem camisa"] = 7023311920,
+	["Camisa 8"] = 4716946122
+}
+local t86 = {}
+for k in pairs(t1[320]) do
+    table.insert(t86, k)
+end
+table.sort(t86)
+v19:AddDropdown({
+	Name = "Camisas",
+	Options = t86,
+	Callback = function(p221)
+    local v852 = t1[320][p221]
+
+    if v852 then
+        pcall(function()
+            t1[275].Remotes.WearShirt:InvokeServer(v852)
+        end)
+    end
+end
+})
+v19:AddTextBox({
+	Name = "ID da Camisa",
+	PlaceholderText = "Insira o ID da camisa",
+	Callback = function(p222)
+    local num = tonumber(p222)
+
+    if num then
+        pcall(function()
+            t1[275].Remotes.WearShirt:InvokeServer(num)
+        end)
+    end
+end
+})
+local success, resultValue = pcall(function()
+    local t87 = {}
+
+    if not t1[14] then
+        error("Tab12 não está definido! Certifique-se de que este script está rodando dentro de um hub com Tab12.")
+    end
+
+    t87[1] = {}
+    t1[14]:AddToggle({
+		Name = "Atravessar Doors",
+		Default = false,
+		Callback = function(p223)
+        if p223 then
+            for _, descendant in pairs(workspace:GetDescendants()) do
+                if descendant:IsA("BasePart") then
+                    local v1304 = string.lower(descendant.Name)
+
+                    if v1304 == "door" or v1304 == "doors" then
+                        if not t87[1][descendant] then
+                            local v1305 = t87[1]
+                            local descendantTransparency = descendant.Transparency
+                            local CanCollide = descendant.CanCollide
+
+                            v1305[descendant] = {
+									Transparency = descendantTransparency,
+									CanCollide = CanCollide
+								}
+                        end
+
+                        descendant.Transparency = 1
+                        descendant.CanCollide = false
+                    end
+                end
+            end
+
+            return
+        end
 
 
                 
