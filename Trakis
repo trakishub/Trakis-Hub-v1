@@ -8939,7 +8939,7 @@ task.delay(5, function()
 end)
 
 
-local flingsTab = Window:MakeTab({"Troll Players", "rbxassetid://6458974334"})
+local flingsTab = Window:MakeTab({"Troll Players", Icon = "user"})
 
 local Services = {
     Players = game:GetService("Players"),
