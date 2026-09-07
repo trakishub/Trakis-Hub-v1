@@ -8940,12 +8940,3 @@ end)
 
 
 local flingsTab = Window:MakeTab({"Troll Players", Icon = "user"})
-
-local Services = {
-    Players = game:GetService("Players"),
-    ReplicatedStorage = game:GetService("ReplicatedStorage"),
-    RunService = game:GetService("RunService"),
-    Workspace = game:GetService("Workspace"),
-    UserInputService = game:GetService("UserInputService")
-}
-
