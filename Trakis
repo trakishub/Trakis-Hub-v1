@@ -274,6 +274,21 @@ ScreenGui:Destroy()
 
 --==================== FIM DA TELA ====================
 
+-- ===========================
+-- PARTE 2 - HUB FUNCIONAL
+-- ===========================
+
+                game:GetService("ReplicatedStorage").RE["1RPNam1eTex1t"]:FireServer(table.unpack({
+                [1] = "RolePlayName",
+                [2] = "[ Trakis hub User ]"
+                }))
+                
+                -- Define a bio do jogador
+                game:GetService("ReplicatedStorage").RE["1RPNam1eTex1t"]:FireServer(table.unpack({
+                    [1] = "RolePlayBio",
+                    [2] = "Criador:cafezin and vitin",
+                }))
+
 
 local redzlib = loadstring(game:HttpGet("https://raw.githubusercontent.com/Zyroniszx/Zyro/refs/heads/main/Main.txt"))()
 
