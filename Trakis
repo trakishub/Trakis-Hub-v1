@@ -15,7 +15,7 @@ local redzlib = loadstring(game:HttpGet("https://raw.githubusercontent.com/Zyron
 
 local Window = redzlib:MakeWindow({
 
-  Title = "Trakis Hub | V4",
+  Title = "Trakis Hub | V4.5",
   SubTitle = "By: cafezin and vitin",
   SaveFolder = "testando | v2"
 })
@@ -28,8 +28,8 @@ Window:AddMinimizeButton({
 
 task.delay(1, function()
    Window:Dialog({
-      Title = "Trakis hub atualizado!!!",
-      Text = "--- Novas coisas",
+      Title = "!TRAKIS HUB ATUALIZADO!",
+      Text = "--NOVO PAINEL ADMIN--",
       Options = {
         {
            "Discord",
