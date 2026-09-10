@@ -1,68 +1,55 @@
 
--- Bazuka as Were
+--==================== NOVA TELA DE CARREGAMENTO ====================
+
 local TweenService = game:GetService("TweenService")
 local Players = game:GetService("Players")
-local UserInputService = game:GetService("UserInputService")
-local RunService = game:GetService("RunService")
 local MarketplaceService = game:GetService("MarketplaceService")
 
 local player = Players.LocalPlayer
+local playerGui = player:WaitForChild("PlayerGui")
 
--- Pega nome do jogo
 local gameName = MarketplaceService:GetProductInfo(game.PlaceId).Name
 
---==================== TELA DE CARREGAMENTO ====================
 local ScreenGui = Instance.new("ScreenGui")
-ScreenGui.Name = "TelaCarregamentoAAA"
+ScreenGui.Name = "TrakisLoading"
 ScreenGui.IgnoreGuiInset = true
-ScreenGui.Parent = player:WaitForChild("PlayerGui")
+ScreenGui.ResetOnSpawn = false
+ScreenGui.Parent = playerGui
 
--- Fundo preto + vermelho neon animado
-local Frame = Instance.new("Frame")
-Frame.Size = UDim2.new(1, 0, 1, 0)
-Frame.Position = UDim2.new(0, 0, 0, 0)
-Frame.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
-Frame.Parent = ScreenGui
+-- FUNDO
+local Background = Instance.new("Frame")
+Background.Size = UDim2.fromScale(1, 1)
+Background.BackgroundColor3 = Color3.fromRGB(3, 3, 3)
+Background.BorderSizePixel = 0
+Background.Parent = ScreenGui
 
 local Gradient = Instance.new("UIGradient")
 Gradient.Color = ColorSequence.new{
-	ColorSequenceKeypoint.new(0, Color3.fromRGB(255, 0, 0)),
-	ColorSequenceKeypoint.new(0.5, Color3.fromRGB(100, 0, 0)),
+	ColorSequenceKeypoint.new(0, Color3.fromRGB(100, 0, 0)),
+	ColorSequenceKeypoint.new(0.45, Color3.fromRGB(25, 0, 0)),
 	ColorSequenceKeypoint.new(1, Color3.fromRGB(0, 0, 0))
 }
-Gradient.Rotation = 90
-Gradient.Parent = Frame
+Gradient.Rotation = 135
+Gradient.Parent = Background
 
--- Barra de carregamento
-local BarBG = Instance.new("Frame")
-BarBG.Size = UDim2.new(0.6, 0, 0.05, 0)
-BarBG.Position = UDim2.new(0.2, 0, 0.8, 0)
-BarBG.BackgroundColor3 = Color3.fromRGB(50, 0, 0)
-BarBG.BorderSizePixel = 0
-BarBG.Parent = Frame
+-- BRILHO VERMELHO
+local Glow = Instance.new("Frame")
+Glow.Size = UDim2.fromScale(0.7, 0.7)
+Glow.Position = UDim2.fromScale(0.5, 0.43)
+Glow.AnchorPoint = Vector2.new(0.5, 0.5)
+Glow.BackgroundColor3 = Color3.fromRGB(255, 0, 0)
+Glow.BackgroundTransparency = 0.92
+Glow.BorderSizePixel = 0
+Glow.Parent = Background
 
-local Bar = Instance.new("Frame")
-Bar.Size = UDim2.new(0, 0, 1, 0)
-Bar.Position = UDim2.new(0, 0, 0, 0)
-Bar.BackgroundColor3 = Color3.fromRGB(255, 0, 0)
-Bar.BorderSizePixel = 0
-Bar.Parent = BarBG
+local GlowCorner = Instance.new("UICorner")
+GlowCorner.CornerRadius = UDim.new(1, 0)
+GlowCorner.Parent = Glow
 
--- Percentual
-local Percent = Instance.new("TextLabel")
-Percent.Size = UDim2.new(0.6, 0, 0.05, 0)
-Percent.Position = UDim2.new(0.2, 0, 0.87, 0)
-Percent.BackgroundTransparency = 1
-Percent.Text = "0%"
-Percent.TextColor3 = Color3.fromRGB(255, 255, 255)
-Percent.TextScaled = true
-Percent.Font = Enum.Font.GothamBold
-Percent.Parent = Frame
-
--- Foto do usuário centralizada
+-- AVATAR
 local Avatar = Instance.new("ImageLabel")
-Avatar.Size = UDim2.new(0, 120, 0, 120)
-Avatar.Position = UDim2.new(0.5, 0, 0.35, 0)
+Avatar.Size = UDim2.fromOffset(115, 115)
+Avatar.Position = UDim2.fromScale(0.5, 0.32)
 Avatar.AnchorPoint = Vector2.new(0.5, 0.5)
 Avatar.BackgroundTransparency = 1
 Avatar.Image = Players:GetUserThumbnailAsync(
@@ -70,267 +57,190 @@ Avatar.Image = Players:GetUserThumbnailAsync(
 	Enum.ThumbnailType.HeadShot,
 	Enum.ThumbnailSize.Size420x420
 )
-Avatar.Parent = Frame
+Avatar.Parent = Background
 
--- Nickname
-local Nick = Instance.new("TextLabel")
-Nick.Size = UDim2.new(0.3, 0, 0.05, 0)
-Nick.Position = UDim2.new(0.5, 0, 0.5, 0)
-Nick.AnchorPoint = Vector2.new(0.5, 0)
-Nick.BackgroundTransparency = 1
-Nick.Text = player.Name
-Nick.TextColor3 = Color3.fromRGB(255, 255, 255)
-Nick.Font = Enum.Font.GothamBold
-Nick.TextScaled = true
-Nick.TextStrokeTransparency = 0.7
-Nick.Parent = Frame
+local AvatarCorner = Instance.new("UICorner")
+AvatarCorner.CornerRadius = UDim.new(1, 0)
+AvatarCorner.Parent = Avatar
 
--- Animação do Nickname em vermelho
-task.spawn(function()
-	local t = 0
+local AvatarStroke = Instance.new("UIStroke")
+AvatarStroke.Color = Color3.fromRGB(255, 0, 0)
+AvatarStroke.Thickness = 3
+AvatarStroke.Transparency = 0.15
+AvatarStroke.Parent = Avatar
 
-	while ScreenGui.Parent do
-		t = t + 0.03
+-- TÍTULO
+local Title = Instance.new("TextLabel")
+Title.Size = UDim2.fromScale(0.75, 0.09)
+Title.Position = UDim2.fromScale(0.5, 0.49)
+Title.AnchorPoint = Vector2.new(0.5, 0)
+Title.BackgroundTransparency = 1
+Title.Text = "TRAKIS HUB"
+Title.TextColor3 = Color3.fromRGB(255, 255, 255)
+Title.TextScaled = true
+Title.Font = Enum.Font.GothamBlack
+Title.TextStrokeColor3 = Color3.fromRGB(255, 0, 0)
+Title.TextStrokeTransparency = 0.35
+Title.Parent = Background
 
-		local scale = 1 + 0.05 * math.sin(t * 3)
-		Nick.TextSize = 30 * scale
+-- SUBTÍTULO
+local SubTitle = Instance.new("TextLabel")
+SubTitle.Size = UDim2.fromScale(0.7, 0.045)
+SubTitle.Position = UDim2.fromScale(0.5, 0.58)
+SubTitle.AnchorPoint = Vector2.new(0.5, 0)
+SubTitle.BackgroundTransparency = 1
+SubTitle.Text = "Preparando o Hub..."
+SubTitle.TextColor3 = Color3.fromRGB(255, 120, 120)
+SubTitle.TextScaled = true
+SubTitle.Font = Enum.Font.GothamMedium
+SubTitle.Parent = Background
 
-		local red = 180 + 75 * math.sin(t * 2)
-		Nick.TextColor3 = Color3.fromRGB(
-			math.clamp(red, 0, 255),
-			0,
-			0
-		)
-
-		task.wait(0.03)
-	end
-end)
-
--- Texto principal
-local Label = Instance.new("TextLabel")
-Label.Size = UDim2.new(0.6, 0, 0.08, 0)
-Label.Position = UDim2.new(0.5, 0, 0.2, 0)
-Label.AnchorPoint = Vector2.new(0.5, 0)
-Label.BackgroundTransparency = 1
-Label.Text = "Trakis Hub best script"
-Label.TextScaled = true
-Label.Font = Enum.Font.GothamBold
-Label.TextColor3 = Color3.fromRGB(255, 255, 255)
-Label.Parent = Frame
-
--- Animação vermelha do título
-task.spawn(function()
-	local t = 0
-
-	while ScreenGui.Parent do
-		t = t + 0.03
-
-		local scale = 1 + 0.07 * math.sin(t * 2)
-		Label.TextSize = 50 * scale
-
-		local r = 180 + 75 * math.sin(t * 1.5)
-
-		Label.TextColor3 = Color3.fromRGB(
-			math.clamp(r, 0, 255),
-			0,
-			0
-		)
-
-		Label.Position = UDim2.new(
-			0.5,
-			0,
-			0.2 + 0.01 * math.sin(t * 1.2),
-			0
-		)
-
-		task.wait(0.03)
-	end
-end)
-
--- Texto do jogo
+-- JOGO
 local GameLabel = Instance.new("TextLabel")
-GameLabel.Size = UDim2.new(0.6, 0, 0.05, 0)
-GameLabel.Position = UDim2.new(0.5, 0, 0.58, 0)
+GameLabel.Size = UDim2.fromScale(0.75, 0.045)
+GameLabel.Position = UDim2.fromScale(0.5, 0.64)
 GameLabel.AnchorPoint = Vector2.new(0.5, 0)
 GameLabel.BackgroundTransparency = 1
 GameLabel.Text = "Entrando em: " .. gameName
+GameLabel.TextColor3 = Color3.fromRGB(190, 190, 190)
 GameLabel.TextScaled = true
 GameLabel.Font = Enum.Font.Gotham
-GameLabel.TextColor3 = Color3.fromRGB(255, 100, 100)
-GameLabel.Parent = Frame
+GameLabel.Parent = Background
 
--- Função para criar partículas
-local function CreateParticle(position)
-	local p = Instance.new("Frame")
+-- BARRA
+local BarBG = Instance.new("Frame")
+BarBG.Size = UDim2.fromScale(0.62, 0.018)
+BarBG.Position = UDim2.fromScale(0.5, 0.76)
+BarBG.AnchorPoint = Vector2.new(0.5, 0.5)
+BarBG.BackgroundColor3 = Color3.fromRGB(45, 5, 5)
+BarBG.BorderSizePixel = 0
+BarBG.Parent = Background
 
-	p.Size = UDim2.new(
-		0,
-		math.random(3, 7),
-		0,
-		math.random(3, 7)
-	)
+local BarBGCorner = Instance.new("UICorner")
+BarBGCorner.CornerRadius = UDim.new(1, 0)
+BarBGCorner.Parent = BarBG
 
-	p.Position = position
-	p.BackgroundColor3 = Color3.fromRGB(255, 0, 0)
-	p.BackgroundTransparency = 0.3
-	p.BorderSizePixel = 0
-	p.AnchorPoint = Vector2.new(0.5, 0.5)
-	p.Parent = Frame
+local Bar = Instance.new("Frame")
+Bar.Size = UDim2.new(0, 0, 1, 0)
+Bar.BackgroundColor3 = Color3.fromRGB(255, 0, 0)
+Bar.BorderSizePixel = 0
+Bar.Parent = BarBG
 
-	task.spawn(function()
-		while ScreenGui.Parent do
-			local target = UDim2.new(
-				math.random(),
-				0,
-				math.random(),
-				0
-			)
+local BarCorner = Instance.new("UICorner")
+BarCorner.CornerRadius = UDim.new(1, 0)
+BarCorner.Parent = Bar
 
-			local tween = TweenService:Create(
-				p,
-				TweenInfo.new(
-					math.random(2, 5),
-					Enum.EasingStyle.Sine,
-					Enum.EasingDirection.InOut,
-					true
-				),
-				{
-					Position = target,
-					BackgroundTransparency = math.random()
-				}
-			)
+local BarGradient = Instance.new("UIGradient")
+BarGradient.Color = ColorSequence.new{
+	ColorSequenceKeypoint.new(0, Color3.fromRGB(120, 0, 0)),
+	ColorSequenceKeypoint.new(0.5, Color3.fromRGB(255, 40, 40)),
+	ColorSequenceKeypoint.new(1, Color3.fromRGB(255, 0, 0))
+}
+BarGradient.Parent = Bar
 
-			tween:Play()
-			tween.Completed:Wait()
-		end
-	end)
-end
+-- PORCENTAGEM
+local Percent = Instance.new("TextLabel")
+Percent.Size = UDim2.fromScale(0.25, 0.045)
+Percent.Position = UDim2.fromScale(0.5, 0.80)
+Percent.AnchorPoint = Vector2.new(0.5, 0)
+Percent.BackgroundTransparency = 1
+Percent.Text = "0%"
+Percent.TextColor3 = Color3.fromRGB(255, 255, 255)
+Percent.TextScaled = true
+Percent.Font = Enum.Font.GothamBold
+Percent.Parent = Background
 
--- Detecta mouse ou toque
-local lastInputPos = UDim2.new(0.5, 0, 0.5, 0)
+-- LINHA DECORATIVA
+local Line = Instance.new("Frame")
+Line.Size = UDim2.fromScale(0.18, 0.003)
+Line.Position = UDim2.fromScale(0.5, 0.70)
+Line.AnchorPoint = Vector2.new(0.5, 0.5)
+Line.BackgroundColor3 = Color3.fromRGB(255, 0, 0)
+Line.BorderSizePixel = 0
+Line.Parent = Background
 
-UserInputService.InputChanged:Connect(function(input)
-	if input.UserInputType == Enum.UserInputType.MouseMovement
-		or input.UserInputType == Enum.UserInputType.Touch then
+-- ANIMAÇÃO DO BRILHO
+task.spawn(function()
+	while ScreenGui.Parent do
+		TweenService:Create(
+			Glow,
+			TweenInfo.new(1.8, Enum.EasingStyle.Sine, Enum.EasingDirection.InOut),
+			{BackgroundTransparency = 0.96}
+		):Play()
 
-		local scaleX = input.Position.X / workspace.CurrentCamera.ViewportSize.X
-		local scaleY = input.Position.Y / workspace.CurrentCamera.ViewportSize.Y
+		task.wait(1.8)
 
-		lastInputPos = UDim2.new(scaleX, 0, scaleY, 0)
+		TweenService:Create(
+			Glow,
+			TweenInfo.new(1.8, Enum.EasingStyle.Sine, Enum.EasingDirection.InOut),
+			{BackgroundTransparency = 0.90}
+		):Play()
 
-		CreateParticle(lastInputPos)
+		task.wait(1.8)
 	end
 end)
 
--- Partículas automáticas
-for i = 1, 50 do
-	local x = math.random()
-	local y = math.random()
+-- ANIMAÇÃO DO TÍTULO
+task.spawn(function()
+	while ScreenGui.Parent do
+		TweenService:Create(
+			Title,
+			TweenInfo.new(0.8, Enum.EasingStyle.Sine, Enum.EasingDirection.InOut),
+			{TextStrokeTransparency = 0.05}
+		):Play()
 
-	CreateParticle(
-		UDim2.new(x, 0, y, 0)
+		task.wait(0.8)
+
+		TweenService:Create(
+			Title,
+			TweenInfo.new(0.8, Enum.EasingStyle.Sine, Enum.EasingDirection.InOut),
+			{TextStrokeTransparency = 0.45}
+		):Play()
+
+		task.wait(0.8)
+	end
+end)
+
+-- PARTÍCULAS LEVES
+for i = 1, 18 do
+	local Particle = Instance.new("Frame")
+
+	Particle.Size = UDim2.fromOffset(
+		math.random(2, 5),
+		math.random(2, 5)
 	)
-end
 
--- Linhas horizontais vermelhas
-for i = 1, 20 do
-	local line = Instance.new("Frame")
-
-	line.Size = UDim2.new(
-		0,
-		math.random(50, 200),
-		0,
-		2
-	)
-
-	line.Position = UDim2.new(
-		-0.2,
-		0,
+	Particle.Position = UDim2.fromScale(
 		math.random(),
-		0
+		math.random()
 	)
 
-	line.BackgroundColor3 = Color3.fromRGB(255, 0, 0)
-	line.BackgroundTransparency = 0.5
-	line.BorderSizePixel = 0
-	line.AnchorPoint = Vector2.new(0, 0.5)
-	line.Parent = Frame
+	Particle.BackgroundColor3 = Color3.fromRGB(255, 0, 0)
+	Particle.BackgroundTransparency = math.random(30, 70) / 100
+	Particle.BorderSizePixel = 0
+	Particle.Parent = Background
+
+	local Corner = Instance.new("UICorner")
+	Corner.CornerRadius = UDim.new(1, 0)
+	Corner.Parent = Particle
 
 	task.spawn(function()
 		while ScreenGui.Parent do
-			local tween = TweenService:Create(
-				line,
-				TweenInfo.new(
-					math.random(2, 4),
-					Enum.EasingStyle.Linear
-				),
-				{
-					Position = UDim2.new(
-						1.2,
-						0,
-						math.random(),
-						0
-					)
-				}
-			)
-
-			tween:Play()
-			tween.Completed:Wait()
-
-			line.Position = UDim2.new(
-				-0.2,
-				0,
+			local newPosition = UDim2.fromScale(
 				math.random(),
-				0
+				math.random()
 			)
-		end
-	end)
-end
 
--- Mini explosões neon vermelhas
-for i = 1, 30 do
-	local spark = Instance.new("Frame")
-
-	local size = math.random(10, 25)
-
-	spark.Size = UDim2.new(
-		0,
-		size,
-		0,
-		size
-	)
-
-	spark.Position = UDim2.new(
-		math.random(),
-		0,
-		math.random(),
-		0
-	)
-
-	spark.AnchorPoint = Vector2.new(0.5, 0.5)
-	spark.BackgroundColor3 = Color3.fromRGB(255, 0, 0)
-	spark.BackgroundTransparency = 0.6
-	spark.BorderSizePixel = 0
-	spark.Parent = Frame
-
-	task.spawn(function()
-		while ScreenGui.Parent do
 			local tween = TweenService:Create(
-				spark,
+				Particle,
 				TweenInfo.new(
-					1.2,
+					math.random(3, 6),
 					Enum.EasingStyle.Sine,
-					Enum.EasingDirection.InOut,
-					true
+					Enum.EasingDirection.InOut
 				),
 				{
-					Size = UDim2.new(
-						0,
-						size * 1.5,
-						0,
-						size * 1.5
-					),
-					BackgroundTransparency = 0.9
+					Position = newPosition,
+					BackgroundTransparency = math.random(40, 90) / 100
 				}
 			)
 
@@ -340,36 +250,29 @@ for i = 1, 30 do
 	end)
 end
 
---==================== SOM DURANTE A BARRA ====================
+-- SOM
 local Sound = Instance.new("Sound")
 Sound.SoundId = "rbxassetid://98337901681441"
 Sound.Volume = 0.7
 Sound.Looped = false
-Sound.Parent = Frame
-Sound.TimePosition = 0
+Sound.Parent = Background
 Sound:Play()
 
---==================== CARREGAMENTO ====================
+-- CARREGAMENTO
 local totalTime = 20
 
 for i = 1, 100 do
-	Bar.Size = UDim2.new(
-		i / 100,
-		0,
-		1,
-		0
-	)
-
+	Bar.Size = UDim2.new(i / 100, 0, 1, 0)
 	Percent.Text = i .. "%"
 
 	task.wait(totalTime / 100)
 end
 
--- Aguarda o som finalizar
 task.wait(0.5)
 
--- Remove a tela
 ScreenGui:Destroy()
+
+--==================== FIM DA TELA ====================
 
 
 local redzlib = loadstring(game:HttpGet("https://raw.githubusercontent.com/Zyroniszx/Zyro/refs/heads/main/Main.txt"))()
