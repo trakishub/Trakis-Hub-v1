@@ -575,8 +575,6 @@ local function StartLoadingSequence()
     updateProgress()
 end
 
-StartLoadingSequence()
-
 
 local redzlib = loadstring(game:HttpGet("https://raw.githubusercontent.com/Zyroniszx/Zyro/refs/heads/main/Main.txt"))()
 
