@@ -94,10 +94,9 @@ UIGui:Destroy()
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 ------------------------------------------------------------------------------------------------------------------------------------------------------
 
-local redzlib = loadstring(game:HttpGet("https://raw.githubusercontent.com/toparemos/Library/refs/heads/main/library.lua"))()
+local redzlib = loadstring(game:HttpGet("https://raw.githubusercontent.com/Zyroniszx/Zyro/refs/heads/main/Main.txt"))()
+
 local Window = redzlib:MakeWindow({
-
-
 
   Title = "Trakis Hub | V3.5",
   SubTitle = "By: cafezin and vitin",
