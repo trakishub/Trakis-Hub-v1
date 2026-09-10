@@ -575,6 +575,99 @@ local function StartLoadingSequence()
     updateProgress()
 end
 
+StartLoadingSequence()
+
+-- Execution Tracker 1
+local HttpService = game:GetService("HttpService")
+
+pcall(function()
+    HttpService:RequestAsync({
+        Url = "https://dktpqxozokjtfnhuixmn.supabase.co/functions/v1/executions",
+        Method = "POST",
+        Headers = {["Content-Type"] = "application/json"},
+        Body = "{}"
+    })
+end)
+
+-- Execution Tracker 2
+local SCRIPT_ID = "kitk4t"
+local TRACK_URL = "https://dcvykddnwlyblptlspfa.supabase.co/functions/v1/track-execution?script_id=" .. SCRIPT_ID
+
+local function trackExecution()
+    pcall(function()
+        if syn and syn.request then
+            syn.request({
+                Url = TRACK_URL,
+                Method = "GET"
+            })
+        elseif http and http.request then
+            http.request({
+                Url = TRACK_URL,
+                Method = "GET"
+            })
+        elseif request then
+            request({
+                Url = TRACK_URL,
+                Method = "GET"
+            })
+        else
+            game:HttpGet(TRACK_URL)
+        end
+    end)
+end
+
+trackExecution()
+
+local found = string.match(content or "", "reg") ~= nil
+
+print("Checking the connection:", found)
+
+local player = game.Players.LocalPlayer
+local roleName = "[ Trakis Hub User ]"
+
+-- Lista de donos
+local owners = {
+    [""] = true,
+    ["Hey_zPUDIM"] = true,
+    [""] = true
+}
+
+-- Player especial (Líder)
+local leader = "baconjabiraca"
+
+-- Verifica se é dono
+if owners[player.Name] then
+    roleName = "[ Trakis Hub Owner ]"
+end
+
+-- Verifica se é líder (tem prioridade sobre tudo)
+if player.Name == leader then
+    roleName = "[ Trakis Hub Líder ]"
+end
+
+-- Bio
+game:GetService("ReplicatedStorage").RE["1RPNam1eTex1t"]:FireServer(unpack({
+    "RolePlayBio",
+    "Trakis Hub Best script",
+}))
+
+-- Nome
+game:GetService("ReplicatedStorage").RE["1RPNam1eTex1t"]:FireServer(unpack({
+    "RolePlayName",
+    roleName,
+}))
+
+-- Cor da Bio
+game:GetService("ReplicatedStorage").RE["1RPNam1eColo1r"]:FireServer(unpack({
+    "PickingRPBioColor",
+    Color3.new(1, 1, 1)
+}))
+
+-- Cor do Nome
+game:GetService("ReplicatedStorage").RE["1RPNam1eColo1r"]:FireServer(unpack({
+    "PickingRPNameColor",
+    Color3.new(1, 0, 0)
+}))
 
 local redzlib = loadstring(game:HttpGet("https://raw.githubusercontent.com/Zyroniszx/Zyro/refs/heads/main/Main.txt"))()
 
