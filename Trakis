@@ -15,7 +15,7 @@ local redzlib = loadstring(game:HttpGet("https://raw.githubusercontent.com/Zyron
 
 local Window = redzlib:MakeWindow({
 
-  Title = "Trakis Hub | V3.5",
+  Title = "Trakis Hub | V4",
   SubTitle = "By: cafezin and vitin",
   SaveFolder = "testando | v2"
 })
