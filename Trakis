@@ -8856,7 +8856,7 @@ task.delay(5, function()
 end)
 
 
-local ScrTab = Window:MakeTab({ "Scripts", "user" })
+local ScrTab = Window:MakeTab({ "Admin", "star" })
 
 ScrTab:AddSection({ "painel admin" })
 ScrTab:AddButton({
