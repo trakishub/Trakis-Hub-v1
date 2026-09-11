@@ -8877,3 +8877,7 @@ ScrTab:AddButton({
     end
 })
 
+local v18 = t1[7]:MakeTab({
+	"Props",
+	"rbxassetid://12120687742"
+})
