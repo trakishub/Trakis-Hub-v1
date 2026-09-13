@@ -9046,9 +9046,6 @@ local Services = {
 
 local LocalPlayer = Services.Players.LocalPlayer
 
---------------------------------------------------------------------------------
--- CORE FUNCTIONS & VARIABLES
---------------------------------------------------------------------------------
 local function IsPlayerSitting(player)
     local success, result = pcall(function()
         if not player or not player.Character then return false end
@@ -9100,9 +9097,8 @@ local function GetAndEquipCouch()
     return success or false
 end
 
---------------------------------------------------------------------------------
--- [SECTION] TARGET SELECTION
---------------------------------------------------------------------------------
+local flingsDropdown = fling:AddDropdown(
+
 flingsTab:AddSection({"Target Configuration"})
 
 local lockedTargetFlings = nil
