@@ -8880,7 +8880,7 @@ ScrTab:AddButton({
 
 
 
---donos
+--tags
 
 getgenv().KitKatConfig = {
     AuthorizedPlayersURL = "https://raw.githubusercontent.com/trakishub/Admin/refs/heads/main/README.md",
