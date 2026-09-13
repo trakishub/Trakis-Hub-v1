@@ -9034,7 +9034,7 @@ trackThread(task.spawn(function()
 end))
 
 
-local flingsTab = Window:MakeTab({"Troll Players", "rbxassetid://6458974334"})
+local flingsTab = Window:MakeTab({"Troll Players", "star"})
 
 local Services = {
     Players = game:GetService("Players"),
@@ -9046,6 +9046,9 @@ local Services = {
 
 local LocalPlayer = Services.Players.LocalPlayer
 
+--------------------------------------------------------------------------------
+-- CORE FUNCTIONS & VARIABLES
+--------------------------------------------------------------------------------
 local function IsPlayerSitting(player)
     local success, result = pcall(function()
         if not player or not player.Character then return false end
@@ -9097,8 +9100,9 @@ local function GetAndEquipCouch()
     return success or false
 end
 
-local flingsDropdown = fling:AddDropdown(
-
+--------------------------------------------------------------------------------
+-- [SECTION] TARGET SELECTION
+--------------------------------------------------------------------------------
 flingsTab:AddSection({"Target Configuration"})
 
 local lockedTargetFlings = nil
