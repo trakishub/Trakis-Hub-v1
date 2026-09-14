@@ -8645,6 +8645,23 @@ ScrTab:AddButton({
     end
 })
 
+local ScrTab = Window:MakeTab({ "Props", "rbxassetid://13364900349" })
+
+ScrTab:AddSection({ "Props scripts" })
+ScrTab:AddButton({
+    Name = "props verity",
+    Callback = function()
+        loadstring(game:HttpGet("https://rawscripts.net/raw/Brookhaven-RP-Repor-227601"))()
+    end
+})
+
+ScrTab:AddSection({ "" })
+ScrTab:AddButton({
+    Name = "props jato",
+    Callback = function()
+        loadstring(game:HttpGet("https://rawscripts.net/raw/Universal-Script-B-2-spirit-Brookhaven-13-props-227917"))()
+    end
+})
 
 local Tab = Window:MakeTab({"Teleports", "tp"}) 
 
