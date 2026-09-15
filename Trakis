@@ -40,8 +40,8 @@ Window:AddMinimizeButton({
 
 task.delay(1, function()
    Window:Dialog({
-      Title = "!TRAKIS HUB ATUALIZADO!",
-      Text = "--NOVO PAINEL ADMIN--",
+      Title = "TRAKIS HUB ATUALIZADO",
+      Text = "--NOVO YOUTUBE MUSIC NA ABA SCRIPTS",
       Options = {
         {
            "Discord",
