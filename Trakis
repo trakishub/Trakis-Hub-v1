@@ -8655,6 +8655,16 @@ ScrTab:AddButton({
     end
 })
 
+local ScrTab = Window:MakeTab({ "Scripts", "codesandbox" })
+
+ScrTab:AddSection({ "Youtube" })
+ScrTab:AddButton({
+    Name = "Youtube music v8",
+    Callback = function()
+        loadstring(game:HttpGet("https://rawscripts.net/raw/Universal-Script-YouTube-Music-Player-V8-236600"))()
+    end
+})
+
 ScrTab:AddSection({ "" })
 ScrTab:AddButton({
     Name = "props jato",
