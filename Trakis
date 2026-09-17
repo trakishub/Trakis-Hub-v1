@@ -45,25 +45,31 @@ Window:AddMinimizeButton({
 
 task.wait(2)
 
-local function scan(root)
+print("===== POSSÍVEIS BOTÕES DA ZYRO =====")
+
+local function procurar(root)
 	for _, v in ipairs(root:GetDescendants()) do
 		if v:IsA("GuiButton") then
-			print(
-				"[ZYRO BUTTON]",
-				v:GetFullName(),
-				"Size:", v.AbsoluteSize,
-				"Position:", v.AbsolutePosition
-			)
+			local size = v.AbsoluteSize
+
+			if size.X >= 20 and size.X <= 50
+				and size.Y >= 20 and size.Y <= 50 then
+
+				print(
+					"[CANDIDATO]",
+					v:GetFullName(),
+					"Size:", size.X, size.Y,
+					"Image:", v:IsA("ImageButton") and v.Image or "N/A"
+				)
+			end
 		end
 	end
 end
 
-print("===== PLAYER GUI =====")
-scan(game:GetService("Players").LocalPlayer.PlayerGui)
+procurar(game:GetService("Players").LocalPlayer.PlayerGui)
 
-print("===== CORE GUI =====")
 pcall(function()
-	scan(game:GetService("CoreGui"))
+	procurar(game:GetService("CoreGui"))
 end)
 
 task.delay(1, function()
