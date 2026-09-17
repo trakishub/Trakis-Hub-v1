@@ -43,8 +43,6 @@ Window:AddMinimizeButton({
     },
 })
 
--- COLE O CÓDIGO DO LED AQUI
-
 --// LED DO BOTÃO ORIGINAL
 
 local TweenService = game:GetService("TweenService")
