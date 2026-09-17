@@ -146,7 +146,6 @@ end)
 
 --// RESTO DO SEU SCRIPT CONTINUA AQUI
 
-task.delay(1, function()
 
 task.delay(1, function()
    Window:Dialog({
