@@ -43,89 +43,28 @@ Window:AddMinimizeButton({
     },
 })
 
--- LED NO BOTÃO ORIGINAL DA ZYRO
+task.wait(2)
 
-local Players = game:GetService("Players")
-local TweenService = game:GetService("TweenService")
-local CoreGui = game:GetService("CoreGui")
-
-local player = Players.LocalPlayer
-local IMAGE_ID = "rbxassetid://123784982520259"
-
-local function procurarBotao(root)
-	for _, obj in ipairs(root:GetDescendants()) do
-		if obj:IsA("GuiButton") then
-			
-			-- A própria ImageButton usa a imagem
-			if obj:IsA("ImageButton") and obj.Image == IMAGE_ID then
-				return obj
-			end
-
-			-- A imagem pode estar dentro do botão
-			for _, child in ipairs(obj:GetDescendants()) do
-				if (child:IsA("ImageLabel") or child:IsA("ImageButton"))
-					and child.Image == IMAGE_ID then
-					return obj
-				end
-			end
+local function scan(root)
+	for _, v in ipairs(root:GetDescendants()) do
+		if v:IsA("GuiButton") then
+			print(
+				"[ZYRO BUTTON]",
+				v:GetFullName(),
+				"Size:", v.AbsoluteSize,
+				"Position:", v.AbsolutePosition
+			)
 		end
 	end
 end
 
-local Button
+print("===== PLAYER GUI =====")
+scan(game:GetService("Players").LocalPlayer.PlayerGui)
 
--- tenta por alguns segundos porque a Zyro pode criar o botão depois
-for i = 1, 50 do
-	Button = procurarBotao(player:WaitForChild("PlayerGui"))
-
-	if not Button then
-		pcall(function()
-			Button = procurarBotao(CoreGui)
-		end)
-	end
-
-	if Button then
-		break
-	end
-
-	task.wait(0.2)
-end
-
-if Button then
-	local Stroke = Instance.new("UIStroke")
-	Stroke.Name = "TrakisLED"
-	Stroke.Color = Color3.fromRGB(255, 0, 0)
-	Stroke.Thickness = 2
-	Stroke.Transparency = 0.15
-	Stroke.Parent = Button
-
-	-- animação LED
-	task.spawn(function()
-		while Button.Parent and Stroke.Parent do
-			TweenService:Create(
-				Stroke,
-				TweenInfo.new(0.8, Enum.EasingStyle.Sine, Enum.EasingDirection.InOut),
-				{
-					Transparency = 0.7,
-					Thickness = 1.5
-				}
-			):Play()
-
-			task.wait(0.8)
-
-			TweenService:Create(
-				Stroke,
-				TweenInfo.new(0.8, Enum.EasingStyle.Sine, Enum.EasingDirection.InOut),
-				{
-					Transparency = 0,
-					Thickness = 3
-				}
-			):Play()
-
-			task.wait(0.8)
-		end
-	end)
-end
+print("===== CORE GUI =====")
+pcall(function()
+	scan(game:GetService("CoreGui"))
+end)
 
 task.delay(1, function()
    Window:Dialog({
