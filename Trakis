@@ -43,28 +43,79 @@ Window:AddMinimizeButton({
     },
 })
 
-task.wait(2)
+--// LED NO BOTÃO ORIGINAL DA ZYRO
 
-local ID = "123784982520259"
+local TweenService = game:GetService("TweenService")
+local CoreGui = game:GetService("CoreGui")
 
-local function procurar(root)
-	for _, obj in ipairs(root:GetDescendants()) do
-		if obj:IsA("ImageButton") or obj:IsA("ImageLabel") then
-			if string.find(obj.Image, ID, 1, true) then
-				print("🔥 ACHEI A IMAGEM DA ZYRO:")
-				print(obj:GetFullName())
-				print("Pai:", obj.Parent:GetFullName())
+task.spawn(function()
+
+	local Button
+
+	-- espera o botão existir
+	for i = 1, 50 do
+		local Nexus = CoreGui:FindFirstChild("Nexus Library V1")
+
+		if Nexus then
+			Button = Nexus:FindFirstChild("ImageButton")
+
+			if Button then
+				break
 			end
 		end
+
+		task.wait(0.1)
 	end
-end
 
-print("===== PROCURANDO ID DA ZYRO =====")
+	if not Button then
+		warn("❌ Botão da Zyro não encontrado")
+		return
+	end
 
-procurar(game:GetService("Players").LocalPlayer.PlayerGui)
+	-- LED
+	local LED = Instance.new("UIStroke")
+	LED.Name = "TrakisLED"
+	LED.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+	LED.Color = Color3.fromRGB(255, 0, 0)
+	LED.Thickness = 2
+	LED.Transparency = 0
+	LED.Parent = Button
 
-pcall(function()
-	procurar(game:GetService("CoreGui"))
+	-- animação LED
+	while Button.Parent and LED.Parent do
+
+		local fadeOut = TweenService:Create(
+			LED,
+			TweenInfo.new(
+				0.8,
+				Enum.EasingStyle.Sine,
+				Enum.EasingDirection.InOut
+			),
+			{
+				Transparency = 0.65,
+				Thickness = 1.5
+			}
+		)
+
+		fadeOut:Play()
+		fadeOut.Completed:Wait()
+
+		local fadeIn = TweenService:Create(
+			LED,
+			TweenInfo.new(
+				0.8,
+				Enum.EasingStyle.Sine,
+				Enum.EasingDirection.InOut
+			),
+			{
+				Transparency = 0,
+				Thickness = 3
+			}
+		)
+
+		fadeIn:Play()
+		fadeIn.Completed:Wait()
+	end
 end)
 
 task.delay(1, function()
