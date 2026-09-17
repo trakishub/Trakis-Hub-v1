@@ -43,7 +43,7 @@ Window:AddMinimizeButton({
     },
 })
 
---// LED NO BOTÃO ORIGINAL DA ZYRO
+-- LED NO BOTÃO ORIGINAL DA ZYRO
 
 local Players = game:GetService("Players")
 local TweenService = game:GetService("TweenService")
