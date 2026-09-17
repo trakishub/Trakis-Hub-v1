@@ -45,26 +45,21 @@ Window:AddMinimizeButton({
 
 task.wait(2)
 
-print("===== POSSÍVEIS BOTÕES DA ZYRO =====")
+local ID = "123784982520259"
 
 local function procurar(root)
-	for _, v in ipairs(root:GetDescendants()) do
-		if v:IsA("GuiButton") then
-			local size = v.AbsoluteSize
-
-			if size.X >= 20 and size.X <= 50
-				and size.Y >= 20 and size.Y <= 50 then
-
-				print(
-					"[CANDIDATO]",
-					v:GetFullName(),
-					"Size:", size.X, size.Y,
-					"Image:", v:IsA("ImageButton") and v.Image or "N/A"
-				)
+	for _, obj in ipairs(root:GetDescendants()) do
+		if obj:IsA("ImageButton") or obj:IsA("ImageLabel") then
+			if string.find(obj.Image, ID, 1, true) then
+				print("🔥 ACHEI A IMAGEM DA ZYRO:")
+				print(obj:GetFullName())
+				print("Pai:", obj.Parent:GetFullName())
 			end
 		end
 	end
 end
+
+print("===== PROCURANDO ID DA ZYRO =====")
 
 procurar(game:GetService("Players").LocalPlayer.PlayerGui)
 
