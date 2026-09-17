@@ -37,6 +37,101 @@ Window:AddMinimizeButton({
     Corner = { CornerRadius = UDim.new(35, 1) },
 })
 
+--// LED DO BOTÃO ORIGINAL
+
+local TweenService = game:GetService("TweenService")
+local Players = game:GetService("Players")
+
+local player = Players.LocalPlayer
+local playerGui = player:WaitForChild("PlayerGui")
+
+task.spawn(function()
+
+    local Button
+
+    -- Procura o botão pela imagem original
+    repeat
+        task.wait(0.2)
+
+        for _, obj in ipairs(playerGui:GetDescendants()) do
+            if (obj:IsA("ImageButton") or obj:IsA("ImageLabel"))
+                and obj.Image == "rbxassetid://123784982520259" then
+
+                Button = obj
+                break
+            end
+        end
+
+    until Button
+
+    -- Deixa redondo
+    local corner = Button:FindFirstChildOfClass("UICorner")
+
+    if not corner then
+        corner = Instance.new("UICorner")
+        corner.CornerRadius = UDim.new(1, 0)
+        corner.Parent = Button
+    else
+        corner.CornerRadius = UDim.new(1, 0)
+    end
+
+    -- Borda LED
+    local LED = Button:FindFirstChild("TrakisLED")
+
+    if not LED then
+        LED = Instance.new("UIStroke")
+        LED.Name = "TrakisLED"
+        LED.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+        LED.Thickness = 1.5
+        LED.Transparency = 0
+        LED.Color = Color3.fromRGB(255, 0, 0)
+        LED.Parent = Button
+    end
+
+    -- Animação do LED
+    task.spawn(function()
+
+        while Button.Parent do
+
+            local acender = TweenService:Create(
+                LED,
+                TweenInfo.new(
+                    0.8,
+                    Enum.EasingStyle.Sine,
+                    Enum.EasingDirection.InOut
+                ),
+                {
+                    Thickness = 2.5,
+                    Transparency = 0,
+                    Color = Color3.fromRGB(255, 30, 30)
+                }
+            )
+
+            local apagar = TweenService:Create(
+                LED,
+                TweenInfo.new(
+                    0.8,
+                    Enum.EasingStyle.Sine,
+                    Enum.EasingDirection.InOut
+                ),
+                {
+                    Thickness = 1.5,
+                    Transparency = 0.45,
+                    Color = Color3.fromRGB(120, 0, 0)
+                }
+            )
+
+            acender:Play()
+            acender.Completed:Wait()
+
+            apagar:Play()
+            apagar.Completed:Wait()
+        end
+
+    end)
+
+end)
+
 task.delay(1, function()
    Window:Dialog({
       Title = "TRAKIS HUB ATUALIZADO",
