@@ -7891,16 +7891,16 @@ createMusicDropdown("Funk", {
         {name = "haha (NGI)", id = "122114766584918"},
         {name = "Montagem do caos", id = "108197999527217"},
         {name = "melhor de todas", id = "103695219371872"},
-        {name = "", id = ""},
-        {name = "", id = ""},
-        {name = "", id = ""},
-        {name = "", id = ""},
-        {name = "", id = ""},
-        {name = "", id = ""},
-        {name = "", id = ""},
-        {name = "", id = ""},
-        {name = "", id = ""},
-        {name = "", id = ""}
+        {name = "sleeping city funk", id = "73811397460869"},
+        {name = "monocle funk", id = "104589848375873"},
+        {name = "dark age funk", id = "116976635180369"},
+        {name = "digital funk", id = "120449053339564"},
+        {name = "montagem tentana", id = "86173461299180"},
+        {name = "montagem bêbado", id = "76423768678097"},
+        {name = "n sei Kkk", id = "107553113067574"},
+        {name = "montagem dimension", id = "91321899732034"},
+        {name = "montagem cozes abece", id = "102688248317930"},
+        {name = "montagem mordida", id = "125558044365066"}
     }
 }, "Option 1")
 
