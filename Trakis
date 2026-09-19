@@ -150,9 +150,9 @@ end)
 task.delay(1, function()
    Window:Dialog({
       Title = "TRAKIS HUB ATUALIZADO",
-      Text = "-- Novas músicas em funk",
-      Text = "-- Novo visual no botão",
-      Text = "-- Novo YouTube music na aba scripts",
+      Text = "-- Novas músicas em funk
+              -- Novo YouTube music na aba scripts 
+              -- Novo visual no botão",
       Options = {
         {
            "Discord",
