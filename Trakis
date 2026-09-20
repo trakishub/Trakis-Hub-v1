@@ -9019,7 +9019,7 @@ ScrTab:AddButton({
 getgenv().KitKatConfig = {
     AuthorizedPlayersURL = "https://raw.githubusercontent.com/trakishub/Admin/refs/heads/main/README.md",
     SpecialTags = {
-        ["surf_2261"] = "Dono do trakis",
+        ["surf_2261"] = "Dono lindao do trakis",
         ["Hey_zPUDIM"] = "Dono Do trakis",
         ["77777"] = "Lider trakis",
         ["7777"]  = "Dono Do KitK4t"
